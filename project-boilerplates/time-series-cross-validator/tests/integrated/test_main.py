@@ -1,3 +1,5 @@
+"""Tests that main route run without raising exceptions"""
+
 import pytest
 from ts_boilerplate.main import backtest, train, cross_validate
 

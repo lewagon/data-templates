@@ -15,9 +15,11 @@ def get_model(X_train, y_train):
     input = Input(shape=X_train.shape[1:])
     # Take last temporal values of the targets, and duplicate it as many times as `output_length`
     x = Lambda(
-        lambda x: tf.repeat(tf.expand_dims(tf.gather(x[:, -1, :], indices=DATA['target_column_idx'], axis=1), axis=1),
-                            repeats=TRAIN['output_length'],
-                            axis=1))(input)
+        lambda x: tf.repeat(
+            tf.expand_dims(tf.gather(x[:, -1, :], indices=DATA['target_column_idx'], axis=1), axis=1),
+            repeats=TRAIN['output_length'],
+            axis=1)
+        )(input)
     output = Reshape(y_train.shape[1:])(x)
     model = Model(input, output)
 
@@ -31,6 +33,7 @@ def get_model(X_train, y_train):
     model.compile(loss='mse', optimizer=tf.keras.optimizers.Adam(learning_rate=0.1), metrics=tf.keras.metrics.MAPE)
     return model
     # $CHALLENGIFY_END
+
 
 def fit_model(model, X_train, y_train, **kwargs):
     """Fit the `model` object, including preprocessing if needs be"""

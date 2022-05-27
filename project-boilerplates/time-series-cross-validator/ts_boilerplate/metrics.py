@@ -4,8 +4,14 @@ Computes usefull Time Series metrics from (y_true, y_test)
 
 import numpy as np
 from tensorflow import reduce_mean
-from tensorflow.keras.metrics import mean_absolute_percentage_error
+from tensorflow.keras.metrics import mean_absolute_error, mean_absolute_percentage_error
 
+
+def mae(y_true: np.ndarray, y_pred: np.ndarray) -> float:
+    """Returns Mean Absolute Error"""
+    # $CHALLENGIFY_BEGIN
+    return reduce_mean(mean_absolute_error(y_true, y_pred)).numpy()
+    # $CHALLENGIFY_END
 
 def mape(y_true: np.ndarray, y_pred: np.ndarray) -> float:
     """Returns Mean Absolute Percentage Error"""

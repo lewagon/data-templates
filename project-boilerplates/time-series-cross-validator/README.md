@@ -10,7 +10,7 @@ In particular
 
 ## Architecture
 - `ts_boilerplate` package
-  - `main.py` comprises the main routes to be called from the CLI (`train` and `cross-validate`)
+  - `main.py` comprises the main routes to be called from the CLI (`train`, `cross-validate`, `backtest`)
   - `params.py` contains project-level global variable to be set manually
 <br>
 
@@ -19,7 +19,7 @@ In particular
     ```python
     data.shape = (length, n_targets+n_covariates)
     ```
-  - `Xy` may persist your tuple (X,y) of **3D arrays** training sets to be fed to your models if you want to store them to avoid preprocessing many time.
+  - `Xy` may persist your tuple (X,y) of **3D arrays** training sets to be fed to your models if you want to store them to avoid preprocessing multiple times.
     ```python
     X.shape = (n_samples, input_length, n_covariates)
     y.shape = (n_samples, output_length, n_targets)
@@ -33,9 +33,10 @@ In particular
 - `tests` folder detailed below
 
 ## How to test your code?
-Run this in your terminal from the root project folder to check your code
+First of all, fill `ts_boilerplate/params.py` corresponding to your true project speficities
+
+Then, run this in your terminal from the root project folder to check your code
 - `pytest`
 - `pytest -m "not optional"`  to only check mandatory tests
 - `pytest -m "not optional" -m "not slow"` to also avoid tests that may be slow (involving fitting your model)
 
-These tests require `ts_boilerplate/params.py` to be filled corresponding to your true project speficities
