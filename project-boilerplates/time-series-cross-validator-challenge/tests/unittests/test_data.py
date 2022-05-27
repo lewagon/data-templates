@@ -31,8 +31,8 @@ def test_get_X_y_returns_correct_shapes(data_monotonic_increase):
         assert y.shape[1] == TRAIN['output_length'] if DATA['n_targets'] == 1 else DATA['n_targets']
 
 
-@pytest.mark.skipif(TRAIN['stride'] == None, reason="Optional test only applicable if sliding method is used to get_X_y")
 @pytest.mark.optional
+@pytest.mark.skipif(TRAIN['stride'] == None, reason="Optional test only applicable if sliding method is used to get_X_y")
 def test_optional_get_X_y_returns_optimal_sample_size(data_monotonic_increase):
     """If get_X_y uses a stride method, check that X and y contains the optimal number of sample each
     """
@@ -50,7 +50,8 @@ def test_optional_get_X_y_returns_optimal_sample_size(data_monotonic_increase):
     assert len(y) == expected_len, "you may have not generated the optimal number of samples, given the stride chosen"
 
 def test_no_data_leak(data_monotonic_increase):
-    """Test that the time gap between the last timestep of `y_train` and the first timestep of `y_test` is at least as big as the forecast horizon
+    """Test that the time gap between the last timestep of `y_train` and the first timestep of `y_test`
+    is at least as big as the forecast horizon
     according to 'https://raw.githubusercontent.com/lewagon/data-images/master/DL/rnn-3.png'
     """
 
