@@ -39,7 +39,6 @@ def generate_data_zeros_and_ones() -> np.ndarray:
     data[:, DATA["target_column_idx"]] = 1.
     return data
 
-
 def generate_X_y_zeros_and_ones() -> Tuple[np.ndarray]:
     """Create a dummy (X,y) tuple made of zeros for covariates, and ones for the targets, just to check if model fit well"""
     length = round(DATA["length"] / TRAIN['stride'])
