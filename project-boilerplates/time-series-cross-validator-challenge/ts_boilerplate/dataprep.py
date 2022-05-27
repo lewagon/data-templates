@@ -23,6 +23,7 @@ def clean_data(data: np.ndarray) -> np.ndarray:
     # YOUR_CODE_HERE
     pass
 
+
 def get_X_y(
     data: np.ndarray,
     input_length: int,
@@ -33,7 +34,7 @@ def get_X_y(
     **kwargs,
 ) -> Tuple[np.ndarray, np.ndarray]:
     """
-    Use `data`, a 2D-array with axis 0 as timesteps, and axis 1 as (tagets+covariates columns)
+    Use `data`, a 2D-array with axis=0 as timesteps, and axis=1 as (tagets+covariates columns)
 
     Returns a Tuple (X,y) of two ndarrays :
         X.shape = (n_samples, input_length, n_covariates)
@@ -58,16 +59,23 @@ def get_X_y(
 
 
 
-def get_folds(data: np.ndarray, fold_length: int, fold_stride: int, **kwargs) -> List[np.ndarray]:
+
+
+def get_folds(data: np.ndarray,
+              fold_length: int,
+              fold_stride: int,
+              **kwargs) -> List[np.ndarray]:
     """Slide through `data` time-series (2D array) to create folds of equal `fold_length`, using `fold_stride` between each fold
     Returns a list of folds, each as a 2D-array time series
     """
     pass  # YOUR CODE HERE
 
 
-def train_test_split(data: np.ndarray, train_test_ratio: float, input_length: int, output_length: int, horizon: int,
+def train_test_split(data: np.ndarray,
+                     train_test_ratio: float,
+                     input_length: int,
                      **kwargs) -> Tuple[np.ndarray, np.ndarray]:
-    """Returns a train and test 2D-arrays
+    """Returns a train and test 2D-arrays, that will not create any data leaks when sampling (X, y) from them
     Inspired from "https://raw.githubusercontent.com/lewagon/data-images/master/DL/rnn-3.png"
     """
     pass  # YOUR CODE HERE

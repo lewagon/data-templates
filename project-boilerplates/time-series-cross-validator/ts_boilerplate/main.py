@@ -133,14 +133,14 @@ if __name__ == '__main__':
     data = pd.read_csv(os.path.join(ROOT_DIR, 'data','raw','data.csv')).to_numpy()
     try:
         train(data=data, print_metrics=True)
-        #cross_validate(data=data, print_metrics=True)
-        #backtest(data=data,
-             stride = 1,
-             start_ratio = 0.9,
-             retrain = True,
-             retrain_every=1,
-             print_metrics=True,
-             plot_metrics=True)
+        # cross_validate(data=data, print_metrics=True)
+        # backtest(data=data,
+        #      stride = 1,
+        #      start_ratio = 0.9,
+        #      retrain = True,
+        #      retrain_every=1,
+        #      print_metrics=True,
+        #      plot_metrics=True)
     except:
         import ipdb, traceback, sys
         extype, value, tb = sys.exc_info()

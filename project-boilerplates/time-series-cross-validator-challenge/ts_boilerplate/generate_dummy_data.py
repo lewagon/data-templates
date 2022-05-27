@@ -24,12 +24,20 @@ def generate_data_monotonic_increase() -> np.ndarray:
     return data
 
 def generate_data_zeros_and_ones() -> np.ndarray:
-    """Create a dummy data made of zeros for covariates, and ones for the targets, just to check if model fit well"""
+    """Create a dummy data made of zeros for covariates, and ones for the targets
+    e.g:
+    data = array(
+      [[1.,1.,0.,0.,0.],
+       [1.,1.,0.,0.,0.],
+       ...,
+       [1.,1.,0.,0.,0.],
+       [1.,1.,0.,0.,0.]]
+    )
+    """
     shape = (DATA['length'], DATA['n_covariates'] + DATA['n_targets'])
     data = np.zeros(shape)
     data[:, DATA["target_column_idx"]] = 1.
     return data
-
 
 def generate_X_y_zeros_and_ones() -> Tuple[np.ndarray]:
     """Create a dummy (X,y) tuple made of zeros for covariates, and ones for the targets, just to check if model fit well"""
