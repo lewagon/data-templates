@@ -2,16 +2,19 @@
 Top level orchestrator of the project. To be called from the CLI.
 It comprises all the "routes" you may want to call
 '''
+from email import header
 import numpy as np
+import pandas as pd
+import os
 from ts_boilerplate.dataprep import get_Xi_yi, get_X_y, get_folds, train_test_split
 from ts_boilerplate.model import get_model, fit_model, predict_output
-from ts_boilerplate.metrics import mape
-from ts_boilerplate.params import CROSS_VAL, TRAIN, DATA
+from ts_boilerplate.metrics import mape, mae
+from ts_boilerplate.params import CROSS_VAL, ROOT_DIR, TRAIN, DATA
 from typing import Tuple, List
 import matplotlib.pyplot as plt
 
 
-def train(data: np.ndarray, print_metrics: bool = False, save_metrics: bool = False):
+def train(data: np.ndarray, print_metrics: bool = False):
     """
     Train the model in this package on one fold `data` containing the 2D-array of time-series for your problem
     Returns `metrics_test` associated with the training
@@ -23,14 +26,14 @@ def train(data: np.ndarray, print_metrics: bool = False, save_metrics: bool = Fa
     model = get_model(X_train, y_train)
     history = fit_model(model, X_train, y_train)
     y_pred = predict_output(model, X_test)
-    metrics_test = mape(y_test, y_pred)
+    metrics_test = mae(y_test, y_pred)
     if print_metrics:
         print("### Test Metric: ", metrics_test)
     return metrics_test
     # $CHALLENGIFY_END
 
 
-def cross_validate(data: np.ndarray, print_metrics: bool = False, save_metrics: bool = False):
+def cross_validate(data: np.ndarray, print_metrics: bool = False):
     """
     Cross-Validate the model in this package on`data`
     Returns `metrics_cv`: the list of test metrics at each fold
@@ -50,10 +53,10 @@ def cross_validate(data: np.ndarray, print_metrics: bool = False, save_metrics: 
 
 
 def backtest(data: np.ndarray,
-             stride: int = 10,
-             start_ratio: float = 0.8,
+             stride: int = 1,
+             start_ratio: float = 0.9,
              retrain: bool = True,
-             retrain_every: int = 30,
+             retrain_every: int = 1,
              print_metrics=False,
              plot_metrics=False):
     """Returns historical forecasts for the entire dataset
@@ -108,21 +111,38 @@ def backtest(data: np.ndarray,
     # Check that we compare apples to apples
     assert y_pred_backtested.shape == y_test_backtested.shape
 
-    metrics_backtested = mape(y_pred_backtested, y_test_backtested)
+    metrics_backtested = mae(y_pred_backtested, y_test_backtested)
 
     if print_metrics:
         print(
             f'### BACKETESTED METRICS BASED ON THE LAST {y_pred_backtested.shape[0]} TIMESTEPS AND WITH {retrain_counter} retrain operations'
         )
-        print(mape(y_pred_backtested, y_test_backtested))
-
+        print(mae(y_pred_backtested, y_test_backtested))
     if plot_metrics:
         # TODO: make it work for any dimension of y
         plt.plot(y_pred_backtested[:,0,0], label='historical forecasts')
         plt.plot(y_test_backtested[:,0,0], label='truth')
-        plt.xlabel('timesteps')
+        plt.xlabel('timesteps number (0=beginning of backtest)')
         plt.legend()
         plt.show()
 
     return metrics_backtested
     # $CHALLENGIFY_END
+
+if __name__ == '__main__':
+    data = pd.read_csv(os.path.join(ROOT_DIR, 'data','raw','data.csv')).to_numpy()
+    try:
+        train(data=data, print_metrics=True)
+        # cross_validate(data=data, print_metrics=True)
+        # backtest(data=data,
+        #      stride = 1,
+        #      start_ratio = 0.9,
+        #      retrain = True,
+        #      retrain_every=1,
+        #      print_metrics=True,
+        #      plot_metrics=True)
+    except:
+        import ipdb, traceback, sys
+        extype, value, tb = sys.exc_info()
+        traceback.print_exc()
+        ipdb.post_mortem(tb)

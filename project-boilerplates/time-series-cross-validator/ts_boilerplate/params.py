@@ -19,7 +19,7 @@ DATA = dict(
 DATA['n_targets'] = len(DATA['target_column_idx']) # number of target time series to predict.
 
 TRAIN = dict(
-    horizon = 10, # start prediction xxx timestep ahead
+    horizon = 4, # start prediction xxx timestep ahead
     input_length = 10, # Length (in time) of each sequences that will be seen by the model (X.shape[1])
     output_length = 7, # Length (in time) of prediction (y.shape[1])
     stride = 1, # Integer used to create all pairs of sample (Xi, yi) by sliding in each data fold. Use `None` if you don't plan to use any sliding method in data.get_X_y

@@ -11,6 +11,7 @@ def get_model(X_train, y_train):
     """Instanciate, compile and and return the model of your choice"""
     pass  # YOUR CODE HERE
 
+
 def fit_model(model, X_train, y_train, **kwargs):
     """Fit the `model` object, including preprocessing if needs be"""
     pass  # YOUR CODE HERE

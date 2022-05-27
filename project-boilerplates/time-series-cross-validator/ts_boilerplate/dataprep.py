@@ -23,6 +23,7 @@ def clean_data(data: np.ndarray) -> np.ndarray:
     # YOUR_CODE_HERE
     pass
 
+
 def get_X_y(
     data: np.ndarray,
     input_length: int,
@@ -33,7 +34,7 @@ def get_X_y(
     **kwargs,
 ) -> Tuple[np.ndarray, np.ndarray]:
     """
-    Use `data`, a 2D-array with axis 0 as timesteps, and axis 1 as (tagets+covariates columns)
+    Use `data`, a 2D-array with axis=0 as timesteps, and axis=1 as (tagets+covariates columns)
 
     Returns a Tuple (X,y) of two ndarrays :
         X.shape = (n_samples, input_length, n_covariates)
@@ -61,7 +62,11 @@ def get_X_y(
     y = []
 
     for i in range(0, len(data), stride):
-        Xi, yi = get_Xi_yi(first_index=i, data=data, horizon=horizon, input_length=input_length, output_length=output_length)
+        Xi, yi = get_Xi_yi(first_index=i,
+                           data=data,
+                           horizon=horizon,
+                           input_length=input_length,
+                           output_length=output_length)
         # Exit loop as soon as we reach the end of the dataset
         if len(yi) < output_length:
             break
@@ -80,8 +85,14 @@ def get_X_y(
     return X, y
     # $CHALLENGIFY_END
 
+
 # $DELETE_BEGIN
-def get_Xi_yi(first_index, data, horizon, input_length, output_length, **kwargs):
+def get_Xi_yi(first_index,
+              data,
+              horizon,
+              input_length,
+              output_length,
+              **kwargs):
     X_start = first_index
     X_last = X_start + input_length
     y_start = X_last + horizon - 1
@@ -92,7 +103,11 @@ def get_Xi_yi(first_index, data, horizon, input_length, output_length, **kwargs)
     return (Xi, yi)
 # $DELETE_END
 
-def get_folds(data: np.ndarray, fold_length: int, fold_stride: int, **kwargs) -> List[np.ndarray]:
+
+def get_folds(data: np.ndarray,
+              fold_length: int,
+              fold_stride: int,
+              **kwargs) -> List[np.ndarray]:
     """Slide through `data` time-series (2D array) to create folds of equal `fold_length`, using `fold_stride` between each fold
     Returns a list of folds, each as a 2D-array time series
     """
@@ -108,15 +123,20 @@ def get_folds(data: np.ndarray, fold_length: int, fold_stride: int, **kwargs) ->
     # $CHALLENGIFY_END
 
 
-def train_test_split(data: np.ndarray, train_test_ratio: float, input_length: int, output_length: int, horizon: int,
+def train_test_split(data: np.ndarray,
+                     train_test_ratio: float,
+                     input_length: int,
                      **kwargs) -> Tuple[np.ndarray, np.ndarray]:
-    """Returns a train and test 2D-arrays
+    """Returns a train and test 2D-arrays, that will not create any data leaks when sampling (X, y) from them
     Inspired from "https://raw.githubusercontent.com/lewagon/data-images/master/DL/rnn-3.png"
     """
     # $CHALLENGIFY_BEGIN
     last_train_idx = round(train_test_ratio * len(data))
     data_train = data[0:last_train_idx, :]
 
+    # [here is the key to no data leak]
+    # The last idx of the first X_test must be equal to the last idx of the last y_train.
+    # Its equal to day n°10 in the picture rnn-3.png
     first_test_idx = last_train_idx - input_length
     data_test = data[first_test_idx:, :]
 
