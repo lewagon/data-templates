@@ -13,6 +13,3 @@ pillow
 # web
 streamlit
 requests
-
-# img
-opencv-python
