@@ -1,0 +1,16 @@
+# packaging
+pip>=9
+setuptools>=26
+twine
+wheel>=0.29
+
+# data science
+six==1.14.0
+numpy
+
+# api
+fastapi
+uvicorn
+
+# img
+opencv-python
