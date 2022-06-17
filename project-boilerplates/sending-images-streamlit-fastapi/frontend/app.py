@@ -10,7 +10,10 @@ st.set_page_config(
    initial_sidebar_state="expanded",
 )
 
-# Set your API url
+# Docker container URL
+# url = 'http://api:8000'
+
+# Localhost development URL
 url = 'http://localhost:8000'
 
 
@@ -30,6 +33,7 @@ st.markdown('''
 st.markdown("---")
 
 ### Create a native Streamlit file upload input
+st.markdown("### Let's do a simple face recognition 👇")
 img_file_buffer = st.file_uploader('Upload an image')
 
 if img_file_buffer is not None:
@@ -45,7 +49,7 @@ if img_file_buffer is not None:
       ### Get bytes from the file buffer
       img_bytes = img_file_buffer.getvalue()
 
-      ### Make request to API (stream=True to stream response as bytes)
+      ### Make request to  API (stream=True to stream response as bytes)
       res = requests.post(url + "/upload_image", files={'img': img_bytes}, stream=True)
 
       if res.status_code == 200:
