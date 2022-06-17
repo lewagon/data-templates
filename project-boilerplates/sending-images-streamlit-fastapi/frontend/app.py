@@ -56,5 +56,6 @@ if img_file_buffer is not None:
         ### Display the image returned by the API
         st.image(res.content, caption="Image returned from API ☝️")
       else:
+        st.markdown("**Oops**, something went wrong 😓 Please try again.")
         print(res.status_code, res.content)
 
