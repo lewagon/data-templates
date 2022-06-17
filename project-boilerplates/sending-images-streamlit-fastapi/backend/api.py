@@ -5,7 +5,7 @@ import numpy as np
 import cv2
 import io
 from starlette.responses import StreamingResponse
-from face_rec.face_detection import annotate_face
+from backend.face_rec.face_detection import annotate_face
 
 app = FastAPI()
 
