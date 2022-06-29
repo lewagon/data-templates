@@ -5,11 +5,11 @@ import numpy as np
 import cv2
 import io
 from starlette.responses import StreamingResponse
-from backend.face_rec.face_detection import annotate_face
+from face_rec.face_detection import annotate_face
 
 app = FastAPI()
 
-# # Allow all requests (optional)
+# # Allow all requests (optional, good for development purposes)
 # app.add_middleware(
 #     CORSMiddleware,
 #     allow_origins=["*"],  # Allows all origins

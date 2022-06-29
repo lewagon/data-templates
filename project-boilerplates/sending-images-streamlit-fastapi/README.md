@@ -11,10 +11,13 @@ This is a boilerplate for any projects that involve sending an image from a web 
 
 ### Using this template
 
-> From inside the `sending-images-streamlit-fastapi` folder
+> From inside the `backend` folder:
 
-1. You can serve the API with `uvicorn backend.api:app --reload` (default port is `8000`)
-2. You can serve the frontend with `streamlit run frontend/app.py` (default port is `8501`)
+You can serve the API with `uvicorn fast_api.api:app --reload` (default port is `8000`)
+
+> From inside the `frontend` folder:
+
+You can serve the frontend with `streamlit run app.py` (default port is `8501`)
 
 ### Using this template with Docker
 
@@ -29,7 +32,7 @@ Both the `frontend` and `backend` have corresponding `Dockerfile`s for the web U
 3. ❗ You won't be able to reach the API container through `localhost`; You'll need to [link](https://docs.docker.com/network/links/) the containers:
 
   * **API:** `docker run -p 8000:8000 NAME_FOR_THE_API_IMAGE --name api`
-  * **UI:** `docker run -p 8501:8501 --link api:api NAME_FOR_THE_FE_IMAGE`
+  * **UI:** `docker run -p 8501:8501 --link api:api NAME_FOR_THE_UI_IMAGE`
 
   This way you can use `api` instead of `localhost` to reach the API container from the frontend
 
