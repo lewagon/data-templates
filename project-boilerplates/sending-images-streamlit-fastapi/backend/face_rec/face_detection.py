@@ -5,7 +5,6 @@ def annotate_face(img_np_array):
   Detect and annotate faces with a red square.
   `img_np_array` should be a (width, height, 3) shape np.array
   """
-  print(img_np_array.shape)
   # Load the default cascade from OpenCV
   face_cascade = cv2.CascadeClassifier('face_rec/haarcascade_frontalface_default.xml')
 

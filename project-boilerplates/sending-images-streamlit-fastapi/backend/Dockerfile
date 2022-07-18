@@ -15,4 +15,4 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # You can add --port $PORT if you need to set PORT as a specific env variable
-CMD uvicorn fast_api.api:app --host 0.0.0.0
+CMD uvicorn fast_api.api:app --host 0.0.0.0 --port $PORT

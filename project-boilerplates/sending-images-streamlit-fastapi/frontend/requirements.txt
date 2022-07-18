@@ -13,3 +13,4 @@ pillow
 # web
 streamlit
 requests
+python-dotenv

@@ -1,20 +1,23 @@
 import streamlit as st
 from PIL import Image
 import requests
+from dotenv import load_dotenv
+import os
 
 # Set page tab display
 st.set_page_config(
    page_title="Simple Image Uploader",
-   page_icon= ':framed-picture:',
+   page_icon= '🖼️',
    layout="wide",
    initial_sidebar_state="expanded",
 )
 
-# Docker container URL
+# Example local Docker container URL
 # url = 'http://api:8000'
-
-# Localhost development URL
-url = 'http://localhost:8000'
+# Example localhost development URL
+# url = 'http://localhost:8000'
+load_dotenv()
+url = os.getenv('API_URL')
 
 
 # App title and description
@@ -50,7 +53,7 @@ if img_file_buffer is not None:
       img_bytes = img_file_buffer.getvalue()
 
       ### Make request to  API (stream=True to stream response as bytes)
-      res = requests.post(url + "/upload_image", files={'img': img_bytes}, stream=True)
+      res = requests.post(url + "/upload_image", files={'img': img_bytes})
 
       if res.status_code == 200:
         ### Display the image returned by the API
