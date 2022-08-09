@@ -17,7 +17,7 @@ A theme could be:
   - ...
 
 
-- A **how to** guide focused on one specific topic worth sharing
+- A **tutorials** guide focused on one specific topic worth sharing
   - e.g. "Removing bottlenecks with Numba, Cython, and TensorFlow"
 
 ## How to contribute ?
