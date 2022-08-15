@@ -1,3 +1,2 @@
 torch
 gym
-gym[box2d]

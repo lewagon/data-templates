@@ -90,5 +90,7 @@ class DQNAgent(Agent):
             return act_space.sample()
         # Else, return action with highest value
         with torch.no_grad():
+            # Get the values of all possible actions
             val = self.net(torch.tensor(obs_new))
+            # Choose the highest-values action
             return torch.argmax(val).numpy()

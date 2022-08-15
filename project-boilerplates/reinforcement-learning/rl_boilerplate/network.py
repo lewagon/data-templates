@@ -11,6 +11,8 @@ import torch.nn
 class DQN(torch.nn.Module):
     """
     A simple Deep Q-Network with 3 linear layers.
+    x_dim refers to the number of dimensions to pass as input
+    y_dim refers to the action space of the agent
     """
 
     def __init__(self, x_dim, y_dim):

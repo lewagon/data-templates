@@ -11,7 +11,7 @@ from config import CFG
 
 def get_env():
     """
-    Returns a gym environment
+    Returns a gym environment. Replace by a custom environment if needed.
     """
     # We use the LunarLander env. Other environments are available.
     return gym.make("LunarLander-v2")
