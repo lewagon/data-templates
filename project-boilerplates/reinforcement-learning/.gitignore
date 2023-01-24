@@ -1,0 +1,11 @@
+*.egg-info/
+.coverage
+.ipynb_checkpoints
+**/*.DS_Store
+data_raw/
+data_processed/
+*.csv
+__pycache__/
+.env
+.direnv/
+.vscode/
