@@ -1,2 +1,6 @@
+# Update as needed
 torch
-gym
+#tensorflow
+gymnasium
+gymnasium[box2d]
+tqdm
