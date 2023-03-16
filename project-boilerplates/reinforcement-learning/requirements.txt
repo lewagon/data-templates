@@ -1,6 +1,8 @@
 # Update as needed
 torch
-#tensorflow
+tensorflow-macos; sys_platform == 'darwin' and 'ARM' in platform_version
+tensorflow; sys_platform == 'darwin' and 'ARM' not in platform_version
+tensorflow; sys_platform != 'darwin'
 gymnasium
 gymnasium[box2d]
 tqdm

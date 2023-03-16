@@ -17,7 +17,7 @@ def get_env():
     return gym.make("LunarLander-v2", render_mode="human")
 
 
-def run_env(env, agt, run_number):
+def run_env(env, agt):
     """
     Run a given environment with a given agent.
     """
@@ -27,8 +27,7 @@ def run_env(env, agt, run_number):
     # We get the action space.
     act_space = env.action_space
 
-    print(f"Run number: {run_number + 1}")
-    for _ in range(1000):
+    for _ in tqdm(range(1000)):
 
         # We can visually render the learning environment. We disable it for performance.
         env.render()

@@ -9,3 +9,4 @@ __pycache__/
 .env
 .direnv/
 .vscode/
+.python-version

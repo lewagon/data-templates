@@ -120,18 +120,17 @@ class DQNAgent_tf(Agent):
 
             # Compute the loss
             loss = tf.square(exp - out)
-            print(loss)
 
+        # Perform a backward propagation.
         grads = tape.gradient(loss, self.net.trainable_variables)
         self.opt.apply_gradients(zip(grads, self.net.trainable_variables))
 
     def get(self, obs_new, act_space):
         """
-        Run an epsilon-greedy policy for next actino selection.
+        Run an epsilon-greedy policy for next action selection.
         """
         # Return random action with probability epsilon
         if random.uniform(0, 1) < CFG.epsilon:
             return act_space.sample()
         # Else, return action with highest value
-        with torch.no_grad():
-            return tf.argmax(self.net(obs_new.reshape(1, -1)), axis=1).numpy()[0]
+        return tf.argmax(self.net(obs_new.reshape(1, -1)), axis=1).numpy()[0]

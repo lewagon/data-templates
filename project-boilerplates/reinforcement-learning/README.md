@@ -1,6 +1,6 @@
 This is a **boilerplate** repo for a reinforcement learning (RL) project.
 
-This directory provides an example repository structure for RL projects using pytorch. This template provides a generic agent using the [deep Q-learning](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf) algorithm as well as an agent playing random actions for baseline performance. The DQN architecture is in itw own class and is hot-swappable with other potential architectures. A sample environment using [OpenAi's gym](https://github.com/openai/gym) and a generic control loop is also provided.
+This directory provides an example repository structure for RL projects using Pytorch or Tensorflow. This template provides a generic agent using the [deep Q-learning](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf) algorithm as well as an agent playing random actions for baseline performance. The DQN architecture is in its own class and is hot-swappable with other potential architectures. A sample environment using [OpenAi's gym](https://github.com/openai/gym) and a generic control loop is also provided.
 
 Note that since RL projects are rarely data-centric, and data has to be generated on-the-fly, requirements are likely to differ from standard ML projects.
 
